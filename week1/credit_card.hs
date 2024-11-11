@@ -11,8 +11,15 @@ toDigitsRev n
     | otherwise         = n `mod` 10 : toDigitsRev (n `div`10)
 
 getMultiplyer :: [Integer] -> Integer
-getMultiplyer (x:xs) = (fromIntegral(length (x:xs) +1) `mod` 2) +1
+getMultiplyer (x:xs)    = (fromIntegral(length (x:xs) +1) `mod` 2) +1
+
 doubleEveryOther :: [Integer] -> [Integer]
 doubleEveryOther []     = []
-doubleEveryOther [x] = [x]
+doubleEveryOther [x]    = [x]
 doubleEveryOther (x:xs) = getMultiplyer (x:xs) * x : doubleEveryOther xs
+
+sumDigits :: [Integer] -> Integer
+sumDigits [] = 0
+sumDigits [x] = sum (toDigits x)
+sumDigits (x:xs) = sum (map (sum . toDigits) (x:xs))
+
